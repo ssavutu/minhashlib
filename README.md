@@ -2,6 +2,8 @@
 
 This is a minimal implementation of MinHashing as described in Jeffrey Ullman's book *Mining Massive Datasets*.
 
+It can be installed via `pip install minhashlib`
+
 ## Current Benchmark Claim
 
 Based on the benchmark outputs in this repository:
