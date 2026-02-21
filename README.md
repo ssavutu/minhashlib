@@ -6,11 +6,11 @@ This is a minimal implementation of MinHashing as described in Jeffrey Ullman's 
 
 Based on the benchmark outputs in this repository:
 
-- On recent multi-seed CPU synthetic runs (`benchmark_outputs_more`, seeds `42-46`), `minhashlib` builds signatures about `~6x` faster than `datasketch`.
+- On recent multi-seed CPU synthetic runs (seeds `42-46`), `minhashlib` builds signatures about `~6x` faster than `datasketch`.
 - Accuracy is comparable in magnitude (similar MAE scale and matching threshold-based metrics in these runs), though `datasketch` is slightly better on MAE in most synthetic scenarios.
 - Memory results are workload-dependent, so this project does not claim universal memory superiority.
 
-In short: this implementation is minimal and fast, with accuracy that is broadly comparable to `datasketch`, but benchmark outcomes depend on dataset and configuration.
+In short: this implementation is minimal and fast, with accuracy that is broadly comparable to `datasketch`, but outcomes vary depending on dataset and configuration.
 
 ## Benchmark Suite
 
@@ -18,10 +18,10 @@ Use `benchmarks/benchmark_claims_suite.py` to run comprehensive, reproducible be
 
 - Multiple datasets (`synthetic`, `20newsgroups`, `wikipedia`, `ag_news`, `local`)
 - Multiple seeds with mean/std/95% CI
-- Metrics: MAE, Precision/Recall/F1 at threshold, Precision@K/Recall@K
+- Metrics: MAE(Mean Average Error), Precision/Recall/F1 at threshold, Precision@K/Recall@K
 - Speed: build/pair-eval/retrieval latency and throughput
 - Memory: peak allocation and bytes/signature
-- Optional scaling sweeps over docs/`num_perm`/doc length
+- Optional scaling sweeps over docs/number of hashes/doc length
 
 Example (full):
 
