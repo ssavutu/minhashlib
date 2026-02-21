@@ -14,7 +14,7 @@ In short: this implementation is minimal and fast, with accuracy that is broadly
 
 ## Benchmark Suite
 
-Use `tests/benchmark_claims_suite.py` to run comprehensive, reproducible benchmarks:
+Use `benchmarks/benchmark_claims_suite.py` to run comprehensive, reproducible benchmarks:
 
 - Multiple datasets (`synthetic`, `20newsgroups`, `wikipedia`, `ag_news`, `local`)
 - Multiple seeds with mean/std/95% CI
@@ -26,7 +26,7 @@ Use `tests/benchmark_claims_suite.py` to run comprehensive, reproducible benchma
 Example (full):
 
 ```bash
-python3 tests/benchmark_claims_suite.py
+python3 benchmarks/benchmark_claims_suite.py
   --datasets synthetic,20newsgroups,wikipedia
   --wiki-dump-path data/simplewiki-latest-pages-articles.xml.bz2
   --seeds 42,43,44
@@ -40,7 +40,7 @@ python3 tests/benchmark_claims_suite.py
 Example (offline/local corpus only):
 
 ```bash
-python3 tests/benchmark_claims_suite.py
+python3 benchmarks/benchmark_claims_suite.py
   --datasets synthetic,local
   --local-docs /path/to/docs.jsonl
   --seeds 42,43,44
@@ -74,22 +74,22 @@ python3 scripts/setup_benchmark_data.py --skip-wikipedia
 python3 scripts/setup_benchmark_data.py --skip-20newsgroups
 ```
 
-### Individual benchmark tests
+### Individual Benchmarks
 
-You can run individual tests instead of the full suite:
+You can run individual benchmarks instead of the full suite:
 
 ```bash
 # Accuracy-only
-python3 tests/benchmark_claims_accuracy.py --datasets synthetic,20newsgroups,wikipedia
+python3 benchmarks/benchmark_claims_accuracy.py --datasets synthetic,20newsgroups,wikipedia
 
 # Performance-only
-python3 tests/benchmark_claims_performance.py --datasets synthetic,20newsgroups,wikipedia
+python3 benchmarks/benchmark_claims_performance.py --datasets synthetic,20newsgroups,wikipedia
 
 # Memory-only
-python3 tests/benchmark_claims_memory.py --datasets synthetic,20newsgroups,wikipedia
+python3 benchmarks/benchmark_claims_memory.py --datasets synthetic,20newsgroups,wikipedia
 
 # Scaling-only (synthetic sweeps)
-python3 tests/benchmark_claims_scaling.py --datasets synthetic
+python3 benchmarks/benchmark_claims_scaling.py --datasets synthetic
 ```
 
-Each individual test writes outputs under `benchmark_outputs/<test_name>/`.
+Each individual benchmark writes outputs under `benchmark_outputs/<test_name>/`.
