@@ -45,6 +45,37 @@ class TestDiffChecker(unittest.TestCase):
 
         self.assertEqual(checker.signatureMatrix.shape, (32, 2))
 
+    def test_append_document_does_not_add_duplicate_signature(self):
+        checker = DiffChecker(num_perm=32, k=2, seed=42)
+        doc = "duplicate document"
+
+        checker.appendDocumentAsSignature(doc)
+        checker.appendDocumentAsSignature(doc)
+
+        self.assertEqual(checker.signatureMatrix.shape, (32, 1))
+
+    def test_compare_appends_missing_documents(self):
+        checker = DiffChecker(num_perm=32, k=2, seed=42)
+
+        before = checker.signatureMatrix.shape
+        similarity = checker.compare("first document", "second document")
+        after = checker.signatureMatrix.shape
+
+        self.assertIsInstance(similarity, float)
+        self.assertEqual(before, (32, 0))
+        self.assertEqual(after, (32, 2))
+
+    def test_compare_reuses_existing_signatures(self):
+        checker = DiffChecker(num_perm=32, k=2, seed=42)
+
+        checker.compare("first document", "second document")
+        after_first = checker.signatureMatrix.shape
+        checker.compare("first document", "second document")
+        after_second = checker.signatureMatrix.shape
+
+        self.assertEqual(after_first, (32, 2))
+        self.assertEqual(after_second, (32, 2))
+
 
 if __name__ == "__main__":
     unittest.main()

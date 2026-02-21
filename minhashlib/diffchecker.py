@@ -54,10 +54,22 @@ class DiffChecker:
         shingles = self.generateKShingles(document)
         return _generate_signature_numba(shingles, self.hashParams, self.p)
 
-    def appendDocumentAsSignature(self, document: str):
+    def appendDocumentAsSignature(self, document: str) -> int:
         signature = self.generateSignature(document)
+        if self.signatureMatrix.shape[1] > 0:
+            matches = np.all(self.signatureMatrix == signature[:, None], axis=0)
+            if np.any(matches):
+                return int(np.flatnonzero(matches)[0])
         self.signatureMatrix = np.column_stack([self.signatureMatrix, signature])
+        return self.signatureMatrix.shape[1] - 1
 
     @staticmethod
     def checkJaccardSignatureSimilarity(a: NDArray[np.int64], b: NDArray[np.int64]) -> float:
         return float(np.count_nonzero(a == b)) / float(a.size)
+
+    def compare(self, a: str, b: str) -> float:
+        idx_a = self.appendDocumentAsSignature(a)
+        idx_b = self.appendDocumentAsSignature(b)
+        sig_a = self.signatureMatrix[:, idx_a]
+        sig_b = self.signatureMatrix[:, idx_b]
+        return self.checkJaccardSignatureSimilarity(sig_a, sig_b)
