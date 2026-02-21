@@ -1,6 +1,16 @@
 # Minhashlib
 
-This is a minimal implementation of Minhashing as described in Jeffrey Ullman's book *Mining Massive Datastructures*. It's been benchmarked against datasketch on a CPU and is comparable in speed and accuracy.
+This is a minimal implementation of MinHashing as described in Jeffrey Ullman's book *Mining Massive Datasets*.
+
+## Current Benchmark Claim
+
+Based on the benchmark outputs in this repository:
+
+- On recent multi-seed CPU synthetic runs (`benchmark_outputs_more`, seeds `42-46`), `minhashlib` builds signatures about `~6x` faster than `datasketch`.
+- Accuracy is comparable in magnitude (similar MAE scale and matching threshold-based metrics in these runs), though `datasketch` is slightly better on MAE in most synthetic scenarios.
+- Memory results are workload-dependent, so this project does not claim universal memory superiority.
+
+In short: this implementation is minimal and fast, with accuracy that is broadly comparable to `datasketch`, but benchmark outcomes depend on dataset and configuration.
 
 ## Benchmark Suite
 
@@ -16,23 +26,23 @@ Use `tests/benchmark_claims_suite.py` to run comprehensive, reproducible benchma
 Example (full):
 
 ```bash
-python3 tests/benchmark_claims_suite.py \
-  --datasets synthetic,20newsgroups,wikipedia \
-  --wiki-dump-path data/simplewiki-latest-pages-articles.xml.bz2 \
-  --seeds 42,43,44 \
-  --p-values 2147483647,3037000493 \
-  --max-docs 2000 \
-  --random-pairs 3000 \
-  --num-queries 200 \
+python3 tests/benchmark_claims_suite.py
+  --datasets synthetic,20newsgroups,wikipedia
+  --wiki-dump-path data/simplewiki-latest-pages-articles.xml.bz2
+  --seeds 42,43,44
+  --p-values 2147483647,3037000493
+  --max-docs 2000
+  --random-pairs 3000
+  --num-queries 200
   --include-scaling
 ```
 
 Example (offline/local corpus only):
 
 ```bash
-python3 tests/benchmark_claims_suite.py \
-  --datasets synthetic,local \
-  --local-docs /path/to/docs.jsonl \
+python3 tests/benchmark_claims_suite.py
+  --datasets synthetic,local
+  --local-docs /path/to/docs.jsonl
   --seeds 42,43,44
 ```
 
