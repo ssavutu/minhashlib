@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*.nbi
+*.nbc
+
+.cache/
+.vscode/
+
+data/
+benchmark_outputs/
+benchmark_outputs_fast/

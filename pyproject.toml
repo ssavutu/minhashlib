@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "minhashlib"
+version = "0.1.0"
+dependencies = [
+  "numpy",
+  "numba",
+  "xxhash",
+]
+requires-python = ">=3.10"
+authors = [
+  {name = "Sachin Avutu", email = "ssavutu@gmail.com"},
+]
+maintainers = [
+  {name = "Sachin Avutu", email = "ssavutu@gmail.com"}
+]
+description = "A fast and minimal minhashing based similarity checking library."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["minhashing", "minhash", "similarity", "difference", "entity resolution", "deduplication"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python"
+]
+
+[project.urls]
+Repository = "https://github.com/ssavutu/minhashlib"
+"Bug Tracker" = "https://github.com/ssavutu/minhashlib/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["minhashlib"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "minhashlib",
+  "README.md",
+  "LICENSE",
+  "pyproject.toml",
+]
